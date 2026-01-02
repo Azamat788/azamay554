@@ -1,0 +1,39 @@
+// Главный класс
+public class BankingSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Bank bank = new Bank("Astana Bank");
+
+        // Добавляем клиентов
+        Customer customer1 = new Customer("Aman", "C001");
+        Customer customer2 = new Customer("Dana", "C002");
+
+        // Добавляем счета
+        customer1.addAccount(new SavingsAccount("S001", 5000, 5));
+        customer1.addAccount(new CurrentAccount("C001", 2000, 1000));
+
+        customer2.addAccount(new SavingsAccount("S002", 8000, 4));
+
+        bank.addCustomer(customer1);
+        bank.addCustomer(customer2);
+
+        System.out.println("All customers:");
+        System.out.println(bank);
+
+        // Фильтрация клиентов по имени
+        System.out.println("\nEnter name to search:");
+        String nameSearch = scanner.nextLine();
+        List<Customer> searchResult = bank.searchCustomerByName(nameSearch);
+        System.out.println("Search results:");
+        for (Customer c : searchResult) {
+            System.out.println(c);
+        }
+
+        // Сортировка клиентов
+        System.out.println("\nSorting customers by name...");
+        bank.sortCustomersByName();
+        System.out.println(bank);
+
+        scanner.close();
+    }
+}
